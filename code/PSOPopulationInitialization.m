@@ -11,18 +11,21 @@ Global.BestPosition = [0];
 for i=1:pop_size
     
     %Initial Position
+    fprintf('Particle %d Old Position: %f → ', i, 0)
     particle(i).Position = unifrnd(lb, up, 1);
-    particle(i).Position
+    fprintf('Particle %d New Position: %f \n', i, particle(i).Position)
+    
     particle(i).Velocity = zeros(1);
+    
     particle(i).Cost = fitness(particle(i).Position);
     
     
     particle(i).BestPosition = particle(i).Position;
     particle(i).BestCost = particle(i).Cost;
     
-    if particle(i).BestCost < Inf
-       Global.BestCost = particle(i).BestCost;
-    end 
+%     if particle(i).BestCost < Inf
+%        Global.BestCost = particle(i).BestCost;
+%     end 
     
 end
 
