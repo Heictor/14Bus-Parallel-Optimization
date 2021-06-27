@@ -5,8 +5,8 @@ clc;
 %rng default;
 
 
-pop_size = 50; %Population Size
-cycles = 100; %Quantity of cicles (iterations)
+pop_size = 2; %Population Size
+cycles = 2; %Quantity of cicles (iterations)
 
 
 %Inertia
@@ -53,16 +53,22 @@ for i=1:1:cycles
        
        fprintf('==========================================================\n')
        fprintf('Fitness Update %d:\n', i)
-       [particle] = PSOParticleCostUpdate( pop_size, particle );
+       [particle] = PSOParticleCostUpdate( pop_size, particle, Global );
        
        fprintf('==========================================================\n')
        fprintf('PBest Update %d:\n', i)
        [particle] = PSOPersonalBestUpdate( pop_size, particle );
        
        fprintf('==========================================================\n')
-       fprintf('Old Global Best:\n Position: %f\n Cost: %f\n', Global.BestPosition, Global.BestCost)
+       fprintf('Old Global Best Position: \n')
+       fprintf('%g \n',Global.BestPosition(:))
+       fprintf('New Global Best Cost: \n ')
+       fprintf('%g \n',Global.BestCost(:))
        [Global] = PSOGlobalBestUpdate( pop_size, particle, Global );
-       fprintf('NewGlobal Best:\n Position: %f\n Cost: %f\n', Global.BestPosition, Global.BestCost)
+       fprintf('New Global Best Position: \n')
+       fprintf('%g \n',Global.BestPosition(:))
+       fprintf('New Global Best Cost: \n ')
+       fprintf('%g \n',Global.BestCost(:))
        
        %fprintf('New Personal Best: %f\n', particle(:).Cost)
 
@@ -70,14 +76,14 @@ for i=1:1:cycles
 end
 
 
-figure(1)
-hold on
-x = -800:.1:800;
-y = 2239+23.02.*x+0.009.*x.^2;
-plot(x,y)
-scatter( [ particle(:).Position ] , [particle(:).Cost] )
-scatter(Global.BestPosition, Global.BestCost,500,'k','o')
-axis([-10 160 0 6175])
-grid on
-hold off
+% figure(1)
+% hold on
+% x = -800:.1:800;
+% y = 2239+23.02.*x+0.009.*x.^2;
+% plot(x,y)
+% scatter( [ particle(:).Position ] , [particle(:).Cost] )
+% scatter(Global.BestPosition, Global.BestCost,500,'k','o')
+% axis([-10 160 0 6175])
+% grid on
+% hold off
 

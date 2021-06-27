@@ -3,7 +3,7 @@ function [ particle ] = PSOPopulationInitialization( pop_size )
 
 %Bounds
 lb = 10; %Lower Bound
-up = 150; %Upper Bound
+up = 15; %Upper Bound
 
 
 Global.BestCost = [-1*inf]; %For minimization = inf, for maximization = -1*inf
@@ -12,16 +12,20 @@ for i=1:pop_size
     
     %Initial Position
     fprintf('Particle %d Old Position: %f → ', i, 0)
-    particle(i).Position = unifrnd(lb, up, 1);
-    fprintf('Particle %d New Position: %f \n', i, particle(i).Position)
+    particle(i).Position = unifrnd(lb, up, 1, 14);
+    while sum(particle(i).Position(:))>150
+        particle(i).Position = unifrnd(lb, up, 1, 14);
+    end
+    fprintf('Particle %d New Position:\n', i)
+    fprintf('%g \n',particle(i).Position(:))
     
-    particle(i).Velocity = zeros(1);
+    particle(i).Velocity(:) = zeros(1, 14);
     
-    particle(i).Cost = fitness(particle(i).Position);
+    particle(i).Cost = fitness(particle(i).Position(:));
     
     
-    particle(i).BestPosition = particle(i).Position;
-    particle(i).BestCost = particle(i).Cost;
+    particle(i).BestPosition(:) = particle(i).Position(:);
+    particle(i).BestCost = particle(i).Cost(:);
     
 %     if particle(i).BestCost < Inf
 %        Global.BestCost = particle(i).BestCost;
