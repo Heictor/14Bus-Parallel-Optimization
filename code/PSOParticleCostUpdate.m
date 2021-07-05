@@ -1,5 +1,5 @@
 %Particle Cost Update
-function [ particle ] = PSOParticleCostUpdate( pop_size, particle, Global)
+function [ particle ] = PSOParticleCostUpdate( pop_size, particle)
     for i=1:pop_size
         %Update Particle Cost
         fprintf('Particle %d Old Cost: %f → ', i, particle(i).Cost(:))
@@ -12,5 +12,7 @@ function [ particle ] = PSOParticleCostUpdate( pop_size, particle, Global)
 %         end
         fprintf('Particle %d New Cost: %f\n', i)
         fprintf('%g \n',particle(i).Cost(:))
+        
+
     end
 end

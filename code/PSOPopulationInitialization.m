@@ -2,8 +2,8 @@
 function [ particle ] = PSOPopulationInitialization( pop_size )
 
 %Bounds
-lb = 10; %Lower Bound
-up = 15; %Upper Bound
+lb = 5; %Lower Bound
+up = 10.7; %Upper Bound
 
 
 Global.BestCost = [-1*inf]; %For minimization = inf, for maximization = -1*inf

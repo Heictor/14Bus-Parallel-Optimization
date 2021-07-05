@@ -1,5 +1,6 @@
 %fitness
 function [score] = fitness(indv)
+%indv = indv/10;
 F1 = (2239+23.02.*indv(1)+0.009.*indv(1).^2);
 F2 = (2239+23.02.*indv(2)+0.009.*indv(2).^2);
 F3 = (2239+23.02.*indv(3)+0.009.*indv(3).^2);

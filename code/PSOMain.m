@@ -1,12 +1,12 @@
 % close all;
 % clear all;
-clc;
-
+% clc;
+tic
 %rng default;
 
 
-pop_size = 2; %Population Size
-cycles = 2; %Quantity of cicles (iterations)
+pop_size = 30; %Population Size
+cycles = 15; %Quantity of cicles (iterations)
 
 
 %Inertia
@@ -53,7 +53,7 @@ for i=1:1:cycles
        
        fprintf('==========================================================\n')
        fprintf('Fitness Update %d:\n', i)
-       [particle] = PSOParticleCostUpdate( pop_size, particle, Global );
+       [particle] = PSOParticleCostUpdate( pop_size, particle);
        
        fprintf('==========================================================\n')
        fprintf('PBest Update %d:\n', i)
@@ -71,19 +71,46 @@ for i=1:1:cycles
        fprintf('%g \n',Global.BestCost(:))
        
        %fprintf('New Personal Best: %f\n', particle(:).Cost)
-
+        
         
 end
-
-
+potencia = [];
+for l=1:1:30
+    potencia = [potencia; sum(particle(l).Position)];
+    
+    
+end
 % figure(1)
 % hold on
-% x = -800:.1:800;
-% y = 2239+23.02.*x+0.009.*x.^2;
-% plot(x,y)
-% scatter( [ particle(:).Position ] , [particle(:).Cost] )
-% scatter(Global.BestPosition, Global.BestCost,500,'k','o')
-% axis([-10 160 0 6175])
+% x = 1:1:14;
+% % y = 2239+23.02.*x+0.009.*x.^2;
+% % plot(x,y)
+% %scatter( [ particle(:).Position ] , [particle(:).Cost] )
+% bar(x,Global.BestPosition(:),'green')
+% title( 'Potência no Sistema = ',sum( Global.BestPosition(:) ) )
+% %legend('Potência')
+% xlabel('Barra/Linha de Transmissão')
+% ylabel('Potência')
+% 
+% %scatter(Global.BestPosition, Global.BestCost,500,'k','o')
+% %axis([-10 160 0 6175])
 % grid on
 % hold off
+% 
+% figure(2)
+% hold on
+% x = 1:1:30;
+% bar(x,potencia(:),'blue')
+% 
+% %title( 'Potência no Sistema = ',sum( Global.BestPosition(:) ) )
+% %legend('Potência')
+% xlabel('Solução/Partícula')
+% ylabel('\Sigma Potência')
+% 
+% %scatter(Global.BestPosition, Global.BestCost,500,'k','o')
+% axis([0 31 0 150])
+% grid on
+% hold off
+
+toc
 
